@@ -4,13 +4,28 @@
   "description": "kill null",
   "main": "index.js",
   "scripts": {
-    "test": "jest --watchAll --coverage"
+    "test": "jest --watchAll --coverage",
+    "prettier": "prettier --write --no-semi {.,test}/*.js"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "{.,test}/*.js": [
+      "prettier --write --no-semi",
+      "git add"
+    ]
   },
   "repository": "https://github.com/RyanLiu0235/kill-null.git",
   "author": "stop2stare <emitremmus0235@163.com>",
   "license": "MIT",
   "devDependencies": {
     "babel-plugin-transform-es2015-modules-commonjs": "^6.26.2",
-    "jest": "^22.4.3"
+    "husky": "^1.0.0-rc.2",
+    "jest": "^22.4.3",
+    "lint-staged": "^7.1.0",
+    "prettier": "^1.12.1"
   }
 }
