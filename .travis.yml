@@ -1,9 +1,6 @@
 language:
   node_js
 node_js:
-  - "7"
-install:
-  - npm install -g codecov
+  - "8"
 script:
-  - jest --coverage && codecov
-  - codecov
+  - jest && codecov

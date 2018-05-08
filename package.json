@@ -18,6 +18,10 @@
       "git add"
     ]
   },
+  "jest": {
+    "coverageDirectory": "./coverage/",
+    "collectCoverage": true
+  },
   "repository": "https://github.com/RyanLiu0235/kill-null.git",
   "author": "stop2stare <emitremmus0235@163.com>",
   "license": "MIT",
