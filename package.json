@@ -1,0 +1,16 @@
+{
+  "name": "kill-null",
+  "version": "0.0.1",
+  "description": "kill null",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest --watchAll --coverage"
+  },
+  "repository": "https://github.com/RyanLiu0235/kill-null.git",
+  "author": "stop2stare <emitremmus0235@163.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.26.2",
+    "jest": "^22.4.3"
+  }
+}

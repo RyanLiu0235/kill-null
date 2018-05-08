@@ -51,6 +51,5 @@ export const array = "array"
 export const object = "object"
 export const string = "string"
 export const number = "number"
-export const boolean = "boolean"
 
 export default killer
