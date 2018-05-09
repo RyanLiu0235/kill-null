@@ -38,11 +38,7 @@ const walk = (raw, types) => {
     value = types[key]
     config = typeof value === object ? value : { type: value }
     const { type, default: defaultValue } = config
-    if (
-      raw[key] === null || type === array
-        ? !(raw[key] instanceof Array)
-        : typeof raw[key] !== type
-    ) {
+    if (raw[key] === null) {
       raw[key] = defaultValue ? defaultValue : typeDict[type]
     }
   }
