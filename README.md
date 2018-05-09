@@ -5,7 +5,7 @@ I am so tired of `null` in RESTful APIs, so define your types first and make you
 ## Usage
 
 ``` js
-import killer, { array, string, object, number } from 'kill-null'
+import kn, { array, string, object, number } from 'kill-null'
 
 const raw = {
   price: null,
@@ -20,10 +20,45 @@ const types = {
   name: string
 }
 
-console.log(killer(raw, types))
+console.log(kn(raw, types))
 // {
 //   price: 0,
 //   goods: [],
+//   stats: {},
+//   name: ''
+// }
+```
+
+> Note that kill-null uses `JSON.parse(JSON.stringify(raw))` to deep-copy raw data, so functions will not work as expected. Anyway, we only handle data from APIS.
+
+You can also pass types with a detailed configuration
+
+``` js
+import kn, { array, string, object, number } from 'kill-null'
+
+const raw = {
+  price: null,
+  tags: null,
+  stats: null,
+  name: null
+}
+const types = {
+  price: {
+    type: number,
+    default: 1
+  },
+  tags: {
+    type: array,
+    default: ['foo', 'boo']
+  },
+  stats: object,
+  name: string
+}
+
+console.log(kn(raw, types))
+// {
+//   price: 1,
+//   tags: ['foo', 'boo'],
 //   stats: {},
 //   name: ''
 // }
