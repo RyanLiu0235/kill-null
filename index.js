@@ -11,7 +11,7 @@ const killer = (raw, types) => {
     for (let i = 0; i < copy.length; i++) {
       walk(copy[i], types)
     }
-  } else if (typeof copy === "object") {
+  } else if (typeof copy === object) {
     walk(copy, types)
   }
   return copy
@@ -32,16 +32,18 @@ const typeDict = {
 const walk = (raw, types) => {
   const keys = Object.keys(types)
   let l = keys.length
-  let key, type
+  let key, value, config
   while (l--) {
     key = keys[l]
-    type = types[key]
+    value = types[key]
+    config = typeof value === object ? value : { type: value }
+    const { type, default: defaultValue } = config
     if (
-      raw[key] === null || type === "array"
+      raw[key] === null || type === array
         ? !(raw[key] instanceof Array)
         : typeof raw[key] !== type
     ) {
-      raw[key] = typeDict[type]
+      raw[key] = defaultValue ? defaultValue : typeDict[type]
     }
   }
 }
