@@ -7,13 +7,7 @@
 const killer = (raw, types) => {
   if (types === undefined) return raw
   const copy = JSON.parse(JSON.stringify(raw))
-  if (copy instanceof Array) {
-    for (let i = 0; i < copy.length; i++) {
-      walk(copy[i], types)
-    }
-  } else if (typeof copy === object) {
-    walk(copy, types)
-  }
+  walk(copy, types)
   return copy
 }
 
@@ -24,22 +18,37 @@ const typeDict = {
   object: {},
   string: ""
 }
+
+const walk = (raw, types) => {
+  if (raw instanceof Array) {
+    for (let i = 0; i < raw.length; i++) {
+      doWalk(raw[i], types)
+    }
+  } else if (typeof raw === object) {
+    doWalk(raw, types)
+  }
+}
 /**
  * walk types and check if raw data is as expected
  * @param  {Object|Array} raw
  * @param  {Object} types
  */
-const walk = (raw, types) => {
+const doWalk = (raw, types) => {
   const keys = Object.keys(types)
   let l = keys.length
-  let key, value, config
+  let key, value, type, config
   while (l--) {
     key = keys[l]
-    value = types[key]
-    config = typeof value === object ? value : { type: value }
-    const { type, default: defaultValue } = config
-    if (raw[key] === null) {
-      raw[key] = defaultValue ? defaultValue : typeDict[type]
+    value = raw[key]
+    type = types[key]
+
+    config = typeof type === object ? type : { type }
+    const { type: requiredType, default: defaultValue, data } = config
+
+    if (value === null) {
+      raw[key] = defaultValue ? defaultValue : typeDict[requiredType]
+    } else if (data !== undefined) {
+      walk(value, data)
     }
   }
 }

@@ -33,14 +33,7 @@ describe("kill null", () => {
   })
 
   it("should accept an object as configurations", () => {
-    const defaultTags = [
-      {
-        tagName: "foo"
-      },
-      {
-        tagName: "boo"
-      }
-    ]
+    const defaultTags = ["foo", "boo"]
     const complexTypes = {
       price: {
         type: number,
@@ -56,6 +49,53 @@ describe("kill null", () => {
     expect(killer(raw, complexTypes)).toEqual({
       price: 0,
       tags: defaultTags,
+      stats: {},
+      name: ""
+    })
+  })
+
+  it("should check nested data if required", () => {
+    const complexTypes = {
+      price: {
+        type: number,
+        default: 0
+      },
+      tags: {
+        type: array,
+        default: [],
+        data: {
+          tagName: {
+            type: string,
+            default: "bar"
+          }
+        }
+      },
+      stats: object,
+      name: string
+    }
+    const nestedRaw = {
+      price: null,
+      tags: [
+        {
+          tagName: "foo"
+        },
+        {
+          tagName: null
+        }
+      ],
+      stats: null,
+      name: null
+    }
+    expect(killer(nestedRaw, complexTypes)).toEqual({
+      price: 0,
+      tags: [
+        {
+          tagName: "foo"
+        },
+        {
+          tagName: "bar"
+        }
+      ],
       stats: {},
       name: ""
     })
