@@ -1,4 +1,4 @@
-import killer, { array, string, object, number } from "../"
+import killer, { array, string, object, number } from "../index.js"
 
 const raw = {
   price: null,
