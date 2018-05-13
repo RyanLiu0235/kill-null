@@ -1,9 +1,9 @@
 {
   "name": "kill-null",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "kill null",
   "main": "./dist/kill-null.js",
-  "module": "./kill-null.esm.js",
+  "module": "./dist/kill-null.esm.js",
   "scripts": {
     "test": "cross-env BABEL_ENV='test' jest --watchAll --coverage",
     "prettier": "prettier --write --no-semi {.,test}/*.js",
@@ -20,16 +20,11 @@
       "git add"
     ]
   },
-  "jest": {
-    "coverageDirectory": "./coverage/",
-    "collectCoverage": true
-  },
   "repository": "https://github.com/RyanLiu0235/kill-null.git",
-  "author": "stop2stare <emitremmus0235@163.com>",
+  "author": "Ryan Liu <emitremmus2233@gmail.com>",
   "license": "MIT",
   "devDependencies": {
     "babel-core": "^6.26.3",
-    "babel-plugin-transform-es2015-modules-commonjs": "^6.26.2",
     "babel-preset-env": "^1.7.0",
     "codecov": "^3.0.1",
     "cross-env": "^5.1.5",

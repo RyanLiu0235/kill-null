@@ -65,7 +65,7 @@
           data = _config.data;
 
 
-      if (value === null) {
+      if (value === null || value === undefined) {
         raw[key] = defaultValue ? defaultValue : typeDict[requiredType];
       } else if (data !== undefined) {
         walk(value, data);
