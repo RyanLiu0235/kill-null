@@ -45,7 +45,7 @@ const doWalk = (raw, types) => {
     config = typeof type === object ? type : { type }
     const { type: requiredType, default: defaultValue, data } = config
 
-    if (value === null) {
+    if (value === null || value === undefined) {
       raw[key] = defaultValue ? defaultValue : typeDict[requiredType]
     } else if (data !== undefined) {
       walk(value, data)

@@ -19,9 +19,15 @@ const filtered = {
   name: ""
 }
 
-describe("kill null", () => {
+describe("kill-null", () => {
   it("should kill null", () => {
     expect(killer(raw, types)).toEqual(filtered)
+  })
+
+  it("should kill undefined", () => {
+    expect(killer(Object.assign({}, raw, { name: undefined }), types)).toEqual(
+      filtered
+    )
   })
 
   it("should kill null in array", () => {
